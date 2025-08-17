@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Asientos - {{ funcion.pelicula.titulo }} ({{ funcion.fecha }} {{ funcion.hora }})</title>
+  <link rel="stylesheet" href="{% static 'micine/asientos.css' %}" />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <script defer src="{% static 'micine/scriptasientos.js' %}"></script>
+</head>
+<body class"asientos">
+    <nav class="navbar">
+    <div class="navbar-left">
+        <span class="usuario">👤 {{ user.username }}</span>
+    </div>
+
+    <div class="navbar-center">
+        <a href="{% url 'home' %}">Cartelera</a>
+        <a href="{% url 'snacks' %}">Snacks</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
+        <a href="{% url 'tickets_usuario' %}">Tickets</a>
+    </div>
+
+    <div class="navbar-right">
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+</nav>
+
+
+  <main class="main-container">
+    <h1>Selecciona tus asientos para "{{ funcion.pelicula.titulo }}"</h1>
+    <p><strong>Sala:</strong> {{ funcion.sala.nombre }} | <strong>Fecha:</strong> {{ funcion.fecha }} | <strong>Hora:</strong> {{ funcion.hora }}</p>
+
+    <form id="form-asientos" method="post" action="{% url 'comprar_asientos' funcion.id %}">
+      {% csrf_token %}
+
+      <div class="cine-top">
+    {% if random_side == "izquierda" %}
+        <div class="puerta-salida izquierda">
+            <i class="fas fa-door-closed icono"></i>
+            <span class="texto">Salida</span>
+        </div>
+    {% endif %}
+
+    <div class="pantalla-cine">
+        <span>Pantalla</span>
+    </div>
+
+    {% if random_side == "derecha" %}
+        <div class="puerta-salida derecha">
+            <i class="fas fa-door-closed icono"></i>
+            <span class="texto">Salida</span>
+        </div>
+    {% endif %}
+</div>
+
+      <div class="asientos-grid">
+        {% for fila in matriz_asientos %}
+          <div class="fila-asientos">
+            {% for asiento in fila %}
+              {% if asiento.vendido %}
+                <div class="asiento vendido"
+                     data-fila="{{ asiento.fila_num }}"
+                     data-columna="{{ asiento.columna }}"
+                     title="Asiento ocupado"
+                     tabindex="-1">
+                  X
+               </div>
+            {% else %}
+               <div class="asiento disponible"
+                    data-fila="{{ asiento.fila_num }}"
+                    data-columna="{{ asiento.columna }}"
+                    title="Asiento disponible"
+                    tabindex="0">
+                  {{ asiento.fila_letra }}-{{ asiento.columna }}
+              </div>
+           {% endif %}
+         {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <input type="hidden" name="asientos" id="asientos-seleccionados" value="[]" />
+      <button type="submit" class="btn">Comprar Asientos Seleccionados</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Votación de Películas - Cine</title>
+    <link rel="stylesheet" href="{% static 'micine/cine.css' %}" />
+</head>
+<body class="cartelera">
+<nav class="navbar">
+    <div class="navbar-left">
+        <span class="usuario">👤 {{ user.username }}</span>
+    </div>
+
+    <div class="navbar-center">
+        <a href="{% url 'home' %}">Cartelera</a>
+        <a href="{% url 'snacks' %}">Snacks</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
+        <a href="{% url 'tickets_usuario' %}">Tickets</a>
+    </div>
+
+    <div class="navbar-right">
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+</nav>
+
+<main class="main-container">
+    <h1>Votación de Películas</h1>
+    <p class="fecha-cierre" style="color: #eee;">Las votaciones se cierran el: {{ fecha_cierre|date:"d M Y H:i" }}</p>
+
+    {% if peliculas %}
+
+    <!-- Bloque de mensajes: muestra errores o avisos -->
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form method="post" action="{% url 'votacionpeliculas' %}">
+        {% csrf_token %}
+        <ul class="funciones-list">
+            {% for pelicula in peliculas %}
+            <li>
+                {% if pelicula.imagen %}
+                    <img src="{{ pelicula.imagen.url }}" alt="Poster de {{ pelicula.titulo }}" />
+                {% else %}
+                    <div style="width:100%; height: 320px; background:#2a002a; border-radius: 20px; color:#ff99bb; display:flex; align-items:center; justify-content:center; font-style:italic; font-weight:bold;">
+                        Sin imagen
+                    </div>
+                {% endif %}
+                <div class="funcion-info">
+                    <h3>{{ pelicula.titulo }}</h3>
+                    <!-- Barra de porcentaje -->
+                    <div class="barra-votos">
+                        <div class="barra-porcentaje" data-porcentaje="{{ pelicula.porcentaje_votos|default_if_none:'0' }}"></div>
+                    </div>
+                    <p>{{ pelicula.porcentaje_votos }}% de votos</p>
+                    <!-- Botón radio para votar -->
+                    <label style="color: #eee;">
+                        <input type="radio" name="pelicula_id"  value="{{ pelicula.id }}" {% if usuario_voto_id == pelicula.id %}checked{% endif %}>
+                        Votar por esta película
+                    </label>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <button type="submit" class="btn votar2-btn">Enviar voto</button>
+    </form>
+    {% else %}
+    <p class="no-funciones">No hay películas disponibles para votar.</p>
+    {% endif %}
+</main>
+</body>
+<script>
+    document.querySelectorAll('.barra-porcentaje').forEach(div => {
+    const porcentaje = div.getAttribute('data-porcentaje') || '0';
+    div.style.width = porcentaje + '%';
+    });
+</script>
+</html>

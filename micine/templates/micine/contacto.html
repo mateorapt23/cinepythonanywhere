@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Contacto - Cine</title>
+    <link rel="stylesheet" href="{% static 'micine/contacto.css' %}" />
+    <style>
+        /* Fondo semi-transparente para el modal */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+        }
+
+        /* Recuadro de agradecimiento centrado */
+        #thankYouBox {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 400px;
+            padding: 1.5rem 2rem;
+            background: #2a002a;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 0 40px #ff66aa, inset 0 0 20px #ff007a88;
+            animation: popUp 0.5s ease-out;
+            z-index: 1001;
+            display: none;
+        }
+
+        @keyframes popUp {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        #thankYouBox .close-btn {
+            position: absolute;
+            top: 8px; right: 12px;
+            background: transparent; border: none;
+            color: #fff; font-size: 1.4rem; font-weight: bold;
+            cursor: pointer;
+        }
+        #thankYouBox .close-btn:hover { color: #ffddff; }
+    </style>
+</head>
+<body class="contacto">
+<nav class="navbar">
+    <div class="navbar-left">
+        <span class="usuario">👤 {{ user.username }}</span>
+    </div>
+    <div class="navbar-center">
+        <a href="{% url 'home' %}">Cartelera</a>
+        <a href="{% url 'snacks' %}">Snacks</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
+        <a href="{% url 'tickets_usuario' %}">Tickets</a>
+    </div>
+    <div class="navbar-right">
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+</nav>
+
+<main class="main-container">
+    <h1>Contacto</h1>
+    <p style="color: white;">¿Tienes dudas o sugerencias? ¡Contáctanos!</p>
+
+    <form id="contactForm" class="contact-form">
+        <!-- Nombre y Apellido en la misma línea -->
+        <div style="display: flex; gap: 0.8rem; margin-bottom: 0.8rem;">
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required style="flex: 1;">
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required style="flex: 1;">
+        </div>
+
+        <!-- Correo electrónico -->
+        <input type="email" id="email" name="email" placeholder="Correo electrónico" required style="margin-bottom: 0.8rem;">
+
+        <!-- Teléfono celular -->
+        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono celular" 
+            pattern="[0-9]{10}" title="Ingresa solo números (10 dígitos)" required 
+            style="margin-bottom: 0.8rem;">
+
+        <!-- Mensaje -->
+        <textarea id="mensaje" name="mensaje" rows="6" placeholder="Mensaje" required style="margin-bottom: 0.8rem;"></textarea>
+
+        <!-- Botón enviar -->
+        <button type="submit" class="btn">Enviar</button>
+    </form>
+</main>
+
+<div id="overlay"></div>
+<div id="thankYouBox">
+    <button class="close-btn">&times;</button>
+    <div class="mensaje-neon" style="color: white;">¡Gracias por tu mensaje!<br>Te responderemos lo antes posible.</div>
+</div>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){ emailjs.init("6Ir9VV2Zy0YXDjW4g"); })(); 
+</script>
+
+<script>
+const form = document.getElementById('contactForm');
+const thankYouBox = document.getElementById('thankYouBox');
+const overlay = document.getElementById('overlay');
+const closeBtn = document.querySelector('#thankYouBox .close-btn');
+
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const templateParams = {
+        nombre: form.nombre.value,
+        apellido: form.apellido.value,
+        email: form.email.value,
+        telefono: form.telefono.value,
+        mensaje: form.mensaje.value
+    };
+
+    emailjs.send('service_slm6fte', 'template_p37q4ek', templateParams)
+    .then(function(response) {
+        overlay.style.display = 'block';
+        thankYouBox.style.display = 'block';
+        form.reset();
+    }, function(error) {
+        alert('Error al enviar. Intenta de nuevo.');
+        console.log('EmailJS Error:', error);
+    });
+});
+
+// Cerrar mensaje
+closeBtn.addEventListener('click', function() {
+    thankYouBox.style.display = 'none';
+    overlay.style.display = 'none';
+});
+overlay.addEventListener('click', function() {
+    thankYouBox.style.display = 'none';
+    overlay.style.display = 'none';
+});
+
+// Bloquear caracteres no numéricos en teléfono
+const telefonoInput = document.getElementById('telefono');
+telefonoInput.addEventListener('keypress', function(e) {
+    if (!/[0-9]/.test(e.key)) e.preventDefault();
+});
+</script>
+</body>
+</html>

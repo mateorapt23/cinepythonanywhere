@@ -1,0 +1,384 @@
+/* Reset y tipografía base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f1f1f1;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar full width con efecto vidrio y neón */
+.navbar {
+  width: 100vw;
+  background: rgba(20, 20, 35, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #ff004d88, inset 0 0 40px #ff004daa;
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff1a4d;
+  text-shadow:
+    0 0 10px #ff1a4d,
+    0 0 20px #ff1a4daa;
+  user-select: none;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-center {
+  gap: 3rem;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar-left {
+  min-width: 150px;
+  justify-content: flex-start;
+}
+
+.navbar-right {
+  min-width: 150px;
+  justify-content: flex-end;
+}
+
+.usuario {
+  color: #ff4d79;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #ff1a4d;
+}
+
+.navbar a {
+  color: #ff4d79;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  color: #fff;
+  transform: scale(1.2);
+  outline: none;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 4px;
+  background: #ff005a;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px #ff005a, 0 0 20px #ff005a;
+}
+
+.navbar a:hover::after,
+.navbar a:focus::after {
+  width: 100%;
+}
+
+/* Contenedor principal full width y height, con padding */
+.main-container {
+  flex-grow: 1;
+  width: 100vw;
+  padding: 3rem 6rem;
+  background:
+    radial-gradient(circle at center, #1c001c, #0d0010 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* descontando navbar */
+  box-shadow:
+    inset 0 0 150px 50px #ff004d88;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Título principal con neón y sombra */
+h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  color: #ff007a;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+}
+
+/* Efecto flicker neon */
+@keyframes flickerNeon {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 12px #ff007a,
+      0 0 25px #ff007a99,
+      0 0 40px #ff007ab3;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.7;
+    text-shadow: none;
+  }
+}
+
+/* Contenedor info ticket: imagen grande a la izquierda, texto a la derecha */
+.pelicula-info {
+  display: flex;
+  gap: 2.5rem;
+  background: #2a002a;
+  border-radius: 30px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 0 30px #ff007a, inset 0 0 60px #8b0047aa;
+  user-select: none;
+  align-items: stretch;
+}
+
+.pelicula-info img {
+  width: 280px;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 25px #ff004d, 0 10px 30px #6f002dbb;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.pelicula-info img:hover {
+  transform: scale(1.12) rotate(2deg);
+  box-shadow:
+    0 0 55px #ff007a,
+    0 15px 60px #ff007aee;
+}
+
+.info-text {
+  color: #f1c1e3;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 100%;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.info-text p {
+  margin: 0 0 0.8rem 0;
+}
+
+.info-text p strong {
+  color: #ff3380;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+}
+
+/* Lista de tickets (funciones) */
+.funciones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cada ticket */
+.funciones-list li {
+  background: #3d003d;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow:
+    8px 8px 22px #ff3366cc,
+    -8px -8px 22px #660033cc,
+    inset 0 0 15px #ff6699cc;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: default;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.funciones-list li:hover {
+  box-shadow:
+    10px 10px 35px #ff55aaee,
+    -10px -10px 35px #bb2277ee,
+    inset 0 0 30px #ff88bbcc;
+  transform: translateY(-6px) scale(1.03);
+  z-index: 3;
+}
+
+/* Contenedor de info dentro del ticket */
+.funcion-info {
+  color: #fce4f4;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Lista de asientos */
+.asientos-list {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ff99bb;
+  letter-spacing: 0.07em;
+}
+
+/* Texto sin tickets */
+.no-funciones {
+  font-size: 1.6rem;
+  font-style: italic;
+  color: #cc6699cc;
+  margin-top: 5rem;
+  text-align: center;
+  user-select: none;
+  letter-spacing: 0.04em;
+}
+
+/* Scroll bar personalizada */
+.main-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.main-container::-webkit-scrollbar-track {
+  background: #100017;
+}
+
+.main-container::-webkit-scrollbar-thumb {
+  background: #ff4d81;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #ff4d81aa;
+}
+
+.botones-grafos {
+  margin-top: 1.8rem;
+  display: flex;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 50px;
+}
+
+/* Botones grafo estilo neón dinámico */
+.btn-grafo {
+  background: linear-gradient(90deg, #ff005a, #ff66aa);
+  padding: 0.6rem 1.8rem;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  box-shadow:
+    0 0 25px #ff66aa,
+    0 0 60px #ff66aaaa;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  text-align: center;
+}
+
+.btn-grafo:hover,
+.btn-grafo:focus {
+  background: linear-gradient(90deg, #ff66aa, #ff005a);
+  box-shadow:
+    0 0 45px #ff99bbcc,
+    0 0 85px #ff77aacc;
+  transform: scale(1.12);
+  outline: none;
+}
+
+
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pelicula-info {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    max-width: 700px;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .pelicula-info img {
+    width: 300px;
+    height: 450px;
+  }
+
+  .info-text {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .funciones-list li {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  .pelicula-info img {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .botones-grafos {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .btn-grafo {
+    min-width: 140px;
+    font-size: 1rem;
+    padding: 0.5rem 1.4rem;
+  }
+}

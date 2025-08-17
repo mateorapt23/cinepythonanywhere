@@ -1,0 +1,313 @@
+/* Basado en tu estilo general */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f1f1f1;
+  overflow-x: hidden;
+}
+
+/* Navbar full width con efecto vidrio y neón */
+.navbar {
+  width: 100vw;
+  background: rgba(20, 20, 35, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #ff004d88, inset 0 0 40px #ff004daa;
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff1a4d;
+  text-shadow:
+    0 0 10px #ff1a4d,
+    0 0 20px #ff1a4daa;
+  user-select: none;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-center {
+  gap: 3rem;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar-left {
+  min-width: 150px;
+  justify-content: flex-start;
+}
+
+.navbar-right {
+  min-width: 150px;
+  justify-content: flex-end;
+}
+
+.usuario {
+  color: #ff4d79;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #ff1a4d;
+}
+
+.navbar a {
+  color: #ff4d79;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  color: #fff;
+  transform: scale(1.2);
+  outline: none;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 4px;
+  background: #ff005a;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px #ff005a, 0 0 20px #ff005a;
+}
+
+.navbar a:hover::after,
+.navbar a:focus::after {
+  width: 100%;
+}
+
+
+.main-container {
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #1c001c, #0d0010 70%);
+  box-shadow: inset 0 0 150px 50px #ff004d88;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  color: #ff007a;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 15px #ff007a, 0 0 30px #ff007a88;
+  animation: flickerNeon 3s infinite alternate;
+}
+
+@keyframes flickerNeon {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 12px #ff007a, 0 0 25px #ff007a99, 0 0 40px #ff007ab3;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.7;
+    text-shadow: none;
+  }
+}
+
+p {
+  font-size: 1.2rem;
+  color: #f5b1d9;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+/* 🪑 ASIENTOS */
+.asientos-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.fila-asientos {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.asiento {
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px #ff339988;
+}
+
+/* Disponible */
+.asiento.disponible {
+  background: #1a001a;
+  color: #ff66aa;
+  border: 2px solid #ff66aa;
+}
+
+.asiento.disponible:hover {
+  background: #ff66aa;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Seleccionado (desde JS) */
+.asiento.seleccionado {
+  background: #ff3399;
+  color: white;
+  border: 2px solid #ffffffaa;
+  box-shadow: 0 0 20px #ff99cc, 0 0 40px #ff66aa;
+}
+
+/* Vendido */
+.asiento.vendido {
+  background: #3d003d;
+  color: #888;
+  border: 2px solid #660033;
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Botón */
+.btn {
+  padding: 0.8rem 2.5rem;
+  background: linear-gradient(90deg, #ff005a, #ff66aa);
+  border: none;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.2rem;
+  box-shadow: 0 0 25px #ff66aa, 0 0 60px #ff66aaaa;
+  cursor: pointer;
+  transition: 0.3s ease all;
+  text-transform: uppercase;
+  align-items: center;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(90deg, #ff66aa, #ff005a);
+  box-shadow: 0 0 45px #ff99bbcc, 0 0 85px #ff77aacc;
+}
+
+
+/* Contenedor que agrupa pantalla y puerta */
+.cine-top {
+    position: relative; /* para que las puertas se posicionen relativas a este contenedor */
+    display: flex;
+    justify-content: center; /* la pantalla siempre centrada */
+    align-items: center;
+    width: 90%;
+    margin: 0 auto 30px auto;
+}
+/* Pantalla como antes */
+.pantalla-cine {
+    flex: 1;
+    height: 40px;
+    background: linear-gradient(to bottom, #ccc, #999);
+    border-radius: 50% / 100%;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    line-height: 40px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3) inset;
+}
+
+/* Puerta de salida */
+.puerta-salida {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ff1a4daa;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 60px;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+}
+.puerta-salida.izquierda {
+    position: absolute;
+    left: -225px; /* distancia hacia afuera, ajusta este valor */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.puerta-salida.derecha {
+    position: absolute;
+    right: -225px; /* distancia hacia afuera, ajusta este valor */
+    top: 50%;
+    transform: translateY(-50%);
+}
+.puerta-salida .icono {
+  font-size: 32px;
+  color: #ffffff;
+  filter: drop-shadow(0 0 5px #ff4d4d);
+  transition: color 0.3s ease;
+  margin-bottom: 4px;
+}
+
+.puerta-salida:hover .icono {
+  color: #ff99bb;
+  filter: drop-shadow(0 0 10px #ff99bb);
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .asiento {
+    width: 40px;
+    height: 40px;
+    font-size: 0.75rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.6rem 2rem;
+  }
+}
+form#form-asientos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#form-asientos button.btn {
+  display: block;
+  margin: 20px auto 0 auto;
+}

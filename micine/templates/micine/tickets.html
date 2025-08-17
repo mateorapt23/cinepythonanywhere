@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mis Tickets</title>
+  <link rel="stylesheet" href="{% static 'micine/tickets.css' %}" />
+</head>
+<body>
+
+  <!-- Navbar simple, igual al diseño CSS -->
+  <nav class="navbar">
+    <div class="navbar-left">
+        <span class="usuario">👤 {{ user.username }}</span>
+    </div>
+
+    <div class="navbar-center">
+        <a href="{% url 'home' %}">Cartelera</a>
+        <a href="{% url 'snacks' %}">Snacks</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
+        <a href="{% url 'tickets_usuario' %}">Tickets</a>
+    </div>
+
+    <div class="navbar-right">
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+</nav>
+
+  <!-- Contenedor principal -->
+  <main class="main-container">
+
+    {% if tickets %}
+      {% for ticket in tickets %}
+
+    <h1>Ticket {{ ticket.id }}</h1>
+
+
+      <ul class="funciones-list">
+          <li>
+            <div class="pelicula-info">
+              <img src="{{ ticket.funcion.pelicula.imagen.url }}" alt="Portada {{ ticket.funcion.pelicula.titulo }}" />
+              <div class="info-text">
+                <p><strong>Película:</strong> {{ ticket.funcion.pelicula.titulo }}</p>
+                <p><strong>Funcion:</strong> {{ ticket.funcion.fecha|date:"F j, Y" }} | {{ ticket.funcion.hora|time:"g a" }} | <strong>Sala:</strong> {{ ticket.funcion.sala.nombre }}</p>
+                <p><strong>Asientos:</strong> {{ ticket.asientos_letras|join:", " }}</p>
+                <p><strong>Comprado el:</strong> {{ ticket.fecha_compra|date:"d M Y H:i" }}</p>
+
+              <div class="botones-grafos">
+                  <a href="{% url 'grafo_asientos' ticket.id %}" class="btn-grafo">Grafo de Asientos</a>
+                  <a href="{% url 'grafo_rutas' ticket.id %}" class="btn-grafo">Grafo de Rutas</a>
+              </div>
+
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="no-funciones">No tienes tickets comprados aún.</p>
+    {% endif %}
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mis Tickets</title>
+  <link rel="stylesheet" href="{% static 'micine/ticketsusuario.css' %}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+        <span class="usuario">👤 {{ user.username }}</span>
+    </div>
+    <div class="navbar-center">
+        <a href="{% url 'home' %}">Cartelera</a>
+        <a href="{% url 'snacks' %}">Snacks</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
+        <a href="{% url 'tickets_usuario' %}">Tickets</a>
+    </div>
+    <div class="navbar-right">
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+  </nav>
+
+  <main class="main-container">
+    <h1>Mis Tickets</h1>
+
+    {% if tickets %}
+      <ul class="tickets-list">
+        {% for ticket in tickets %}
+          <li class="ticket-card">
+            <div class="ticket-info">
+              <h2>{{ ticket.funcion.pelicula.titulo }}</h2>
+              <a class="ver-ticket-btn" href="{% url 'ticket_detalle' ticket.id %}">Ver Ticket</a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No tienes tickets comprados aún.</p>
+    {% endif %}
+  </main>
+</body>
+</html>

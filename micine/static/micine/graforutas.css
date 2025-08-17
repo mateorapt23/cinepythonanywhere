@@ -1,0 +1,427 @@
+/* RESET y TIPOGRAFÍA BASE */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+html, body {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f1f1f1;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  width: 100vw;
+  background: rgba(20, 20, 35, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #ff004d88, inset 0 0 40px #ff004daa;
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff1a4d;
+  text-shadow:
+    0 0 10px #ff1a4d,
+    0 0 20px #ff1a4daa;
+  user-select: none;
+}
+.navbar-left, .navbar-center, .navbar-right {
+  display: flex;
+  align-items: center;
+}
+.navbar-center {
+  gap: 3rem;
+  justify-content: center;
+  flex: 1;
+}
+.navbar-left {
+  min-width: 150px;
+  justify-content: flex-start;
+}
+.navbar-right {
+  min-width: 150px;
+  justify-content: flex-end;
+}
+.usuario {
+  color: #ff4d79;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #ff1a4d;
+}
+.navbar a {
+  color: #ff4d79;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+.navbar a:hover,
+.navbar a:focus {
+  color: #fff;
+  transform: scale(1.2);
+  outline: none;
+}
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 4px;
+  background: #ff005a;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px #ff005a, 0 0 20px #ff005a;
+}
+.navbar a:hover::after,
+.navbar a:focus::after {
+  width: 100%;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.main-container {
+  flex-grow: 1;
+  width: 100vw;
+  padding: 3rem 6rem;
+  background:
+    radial-gradient(circle at center, #1c001c, #0d0010 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* navbar height */
+  box-shadow:
+    inset 0 0 150px 50px #ff004d88;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* ===== TÍTULOS ===== */
+h1 {
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+  color: #ff007a;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+}
+h2 {
+  font-size: 1rem;
+  margin: 3rem 0 2rem 0;
+  color: #ff3366;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-shadow:
+    0 0 15px #ff3366cc,
+    0 0 25px #ff3366bb;
+  user-select: none;
+}
+h3 {
+  color: #ff3366;
+  font-weight: 900;
+  text-align: center;
+  text-shadow:
+    0 0 15px #ff3366cc,
+    0 0 25px #ff3366bb;
+  user-select: none;
+}
+@keyframes flickerNeon {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 12px #ff007a,
+      0 0 25px #ff007a99,
+      0 0 40px #ff007ab3;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.7;
+    text-shadow: none;
+  }
+}
+
+/* ===== PELÍCULA INFO (DETALLE TICKET) ===== */
+.pelicula-info {
+  display: flex;
+  gap: 2.5rem;
+  background: #2a002a;
+  border-radius: 30px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 0 30px #ff007a, inset 0 0 60px #8b0047aa;
+  user-select: none;
+  align-items: flex-start;
+}
+.pelicula-info div:first-child p {
+  color: #f1c1e3;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+  user-select: text;
+}
+.pelicula-info div:first-child p strong {
+  color: #ff3380;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+}
+.pelicula-info div:last-child {
+  display: flex;
+  align-items: center;
+}
+.btn {
+  padding: 0.7rem 2.4rem;
+  background: linear-gradient(90deg, #ff005a, #ff66aa);
+  border: none;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-decoration: none;
+  text-align: center;
+  box-shadow:
+    0 0 25px #ff66aa,
+    0 0 60px #ff66aaaa;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.25s ease;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 10;
+}
+.btn:hover,
+.btn:focus {
+  background: linear-gradient(90deg, #ff66aa, #ff005a);
+  box-shadow:
+    0 0 45px #ff99bbcc,
+    0 0 85px #ff77aacc;
+  transform: scale(1.15);
+  outline: none;
+}
+
+/* ===== LEYENDA ===== */
+.grafo-legend {
+  max-width: 1100px;
+  margin: 0.6rem auto 1.5rem auto;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  color: #f1f1f1;
+  font-weight: 700;
+  font-size: 1.15rem;
+  user-select: none;
+}
+.legend-item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+.legend-sample {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: inline-block;
+  box-shadow:
+    0 0 8px #fff5,
+    inset 0 0 5px #fff5;
+}
+
+/* Colores específicos para leyenda */
+.legend-item:nth-child(1) .legend-sample {
+  background: #2ecc71; /* Disponible */
+  box-shadow:
+    0 0 12px #2ecc71cc,
+    inset 0 0 8px #2ecc71cc;
+}
+.legend-item:nth-child(2) .legend-sample {
+  background: #d9534f; /* Vendido */
+  box-shadow:
+    0 0 12px #d9534fcc,
+    inset 0 0 8px #d9534fcc;
+}
+.legend-item:nth-child(3) .legend-sample {
+  background: #ffd700; /* Tus asientos */
+  box-shadow:
+    0 0 12px #ffd700cc,
+    inset 0 0 8px #ffd700cc;
+}
+
+/* ===== CONTENEDOR SVG PRINCIPAL (GRAFO GRANDE) ===== */
+#grafo-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 1.8rem auto 3rem auto;
+  background: transparent;
+  border-radius: 20px;
+  user-select: none;
+  box-shadow:
+    0 0 25px #ff007a88,
+    inset 0 0 50px #ff007abb;
+  padding: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+#grafo-container:hover {
+  box-shadow:
+    0 0 40px #ff33aaee,
+    inset 0 0 60px #ff33aaff;
+}
+
+/* Estilos para nodos asiento SVG */
+.seat-node {
+  filter: drop-shadow(0 0 3px #000);
+  transition: fill 0.25s ease;
+  stroke: #222;
+  stroke-width: 1.5px;
+  cursor: pointer;
+}
+.seat-node:hover {
+  stroke: #fff;
+  stroke-width: 2.5px;
+  filter: drop-shadow(0 0 8px #ffd700);
+}
+
+/* Texto dentro del SVG */
+svg text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+  pointer-events: none;
+  fill: #fff;
+  text-shadow:
+    0 0 2px #000;
+}
+#grafo-container { width: 100%; max-width: 1100px; margin: 1.8rem auto; background: transparent; }
+    .grafo-legend { max-width:1100px; margin: 0.6rem auto; display:flex; gap:1rem; align-items:center; color:#f1f1f1; }
+    .legend-item { display:flex; gap:0.6rem; align-items:center; font-weight:700 }
+    .legend-sample { width:18px; height:18px; border-radius:6px; display:inline-block; }
+    .grafos-reducidos-container {
+      max-width: 1100px; 
+      margin: 2rem auto;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .grafo-reducido-box {
+      display: block !important;       /* Forzar que esté visible */
+      position: relative;               /* Por defecto relativo, se puede cambiar si quieres fijo */
+      z-index: 1000;                   /* Que esté arriba */
+      border-radius: 8px;
+      padding: 1rem;
+      width: 320px;
+      height: 320px;
+      background: #2a002a;
+      box-shadow:
+      0 0 40px #ff3366cc,
+      inset 0 0 60px #8b0047aa;
+      overflow: visible;               /* Que no se corte nada */
+      cursor: grab;
+      transition: box-shadow 0.3s ease;
+    }
+
+/* Opcional: cuando el usuario arrastre o interactúe */
+    #grafo-reducido-box:active {
+      cursor: grabbing;
+    }
+
+/* Si quieres un borde/neón más visible */
+    #grafo-reducido-box {
+      border: 2px solid #ff66aa;
+      box-shadow:
+      0 0 45px #ff66aa,
+      inset 0 0 70px #ff4488cc; 
+    }
+    .grafo-reducido-box h3 {
+      margin-bottom: 0.5rem;
+    }
+    #grafo-info {
+      max-width: 1100px;
+      margin: 1rem auto;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+/* ===== BOTON VOLVER ===== */
+.pelicula-info .btn {
+  align-self: center;
+  padding: 0.7rem 2.8rem;
+  font-weight: 900;
+  font-size: 1.15rem;
+  box-shadow:
+    0 0 30px #ff007a,
+    0 0 60px #ff007a99;
+  transition: box-shadow 0.4s ease;
+  user-select: none;
+  margin-top: 35px;
+}
+.pelicula-info .btn:hover {
+  box-shadow:
+    0 0 50px #ff3399,
+    0 0 90px #ff3399cc;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .main-container {
+    padding: 2rem 3rem;
+  }
+  .pelicula-info {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    max-width: 700px;
+    align-items: center;
+    gap: 2rem;
+  }
+  .pelicula-info div:first-child p {
+    text-align: center;
+  }
+  #grafo-pequeno-container {
+    width: 300px;
+    height: 220px;
+  }
+  #grafo-info {
+    max-width: 300px;
+  }
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2.4rem;
+  }
+  .btn {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
+  #grafo-pequeno-container {
+    width: 100%;
+    height: 200px;
+  }
+  #grafo-info {
+    max-width: 100%;
+    font-size: 13px;
+  }
+}

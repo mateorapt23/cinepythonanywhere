@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Snacks - Cine</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="{% static 'micine/snacks.css' %}" />
+
+</head>
+<body class="snacks">
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <span class="usuario">👤 {{ user.username }}</span>
+    </div>
+
+    <div class="navbar-center">
+        <a href="{% url 'home' %}">Cartelera</a>
+        <a href="{% url 'snacks' %}">Snacks</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
+        <a href="{% url 'tickets_usuario' %}">Tickets</a>
+    </div>
+
+    <div class="navbar-right">
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+</nav>
+
+<main class="main-container">
+    <h1>Snacks y Combos</h1>
+
+    <!-- Selección de fecha global -->
+    <div class="fecha-container" style="width: 100%; display:flex; justify-content:center; margin-bottom: 2rem;">
+        <label for="fecha-compra" style="color: white;">Fecha de compra:</label>
+        <input type="text" id="fecha-compra" value="{{ today }}">
+    </div>
+
+    <div class="snacks-grid">
+        {% for snack in snacks %}
+        <div class="snack-card">
+            {% if snack.imagen %}
+                <img src="{{ snack.imagen.url }}" alt="{{ snack.nombre }}" />
+            {% else %}
+                <div style="width:100%; height:200px; background:#2a002a; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#ff99bb;">
+                    Sin imagen
+                </div>
+            {% endif %}
+            <h3>{{ snack.nombre }}</h3>
+            <p>{{ snack.descripcion }}</p>
+            <p>Precio: ${{ snack.precio }}</p>
+            <button class="btn comprar-btn" data-snack-id="{{ snack.id }}">Comprar</button>
+        </div>
+        {% empty %}
+        <p>No hay snacks disponibles.</p>
+        {% endfor %}
+    </div>
+</main>
+
+<script>
+    const comprarSnackUrl = "{% url 'comprar_snack' %}";
+</script>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("#fecha-compra", {
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        defaultDate: "{{ today }}",
+    });
+</script>
+
+<script src="{% static 'micine/snacks.js' %}"></script>
+</body>
+</html>

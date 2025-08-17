@@ -1,0 +1,275 @@
+/* Reset y tipografía base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f1f1f1;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar estilo neón */
+.navbar {
+  width: 100vw;
+  background: rgba(20, 20, 35, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #ff004d88, inset 0 0 40px #ff004daa;
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff1a4d;
+  text-shadow: 0 0 10px #ff1a4d, 0 0 20px #ff004daa;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-center {
+  gap: 3rem;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar-left {
+  min-width: 150px;
+  justify-content: flex-start;
+}
+
+.navbar-right {
+  min-width: 150px;
+  justify-content: flex-end;
+}
+
+.usuario {
+  color: #ff4d79;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #ff1a4d;
+}
+
+.navbar a {
+  color: #ff4d79;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 4px;
+  background: #ff005a;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px #ff005a, 0 0 20px #ff005a;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+/* Contenedor principal con animación sutil de fondo */
+.main-container {
+  flex-grow: 1;
+  width: 100vw;
+  padding: 2rem 3rem;
+  min-height: calc(100vh - 80px);
+  background: radial-gradient(circle at center, #1c001c, #0d0010 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 0 150px 50px #ff004d88;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  animation: bgPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Títulos y labels con neón animado */
+h1, p, label {
+  color: #ff007a;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px #ff007a, 0 0 25px #ff007a99, 0 0 40px #ff007ab3;
+  animation: flickerNeon 3s infinite alternate;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+p {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+@keyframes flickerNeon {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 22%, 24%, 55% { opacity: 0.7; }
+}
+
+/* Formulario de contacto dinámico */
+.contact-form {
+  background: rgba(20, 20, 35, 0.75);
+  padding: 1rem 1.2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #ff004daa, inset 0 0 30px #ff004d55;
+  max-width: 450px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.contact-form:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 35px #ff66aa, inset 0 0 40px #ff004d88;
+}
+
+/* Labels */
+.contact-form label {
+  font-size: 0.85rem;
+  color: #ff007a;
+  font-weight: 700;
+  text-shadow: 0 0 6px #ff007a, 0 0 12px #ff007a99;
+}
+
+/* Inputs y textarea */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: #1a0021;
+  color: #fff;
+  font-size: 0.95rem;
+  box-shadow: inset 0 0 8px #ff007a88;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  box-shadow: 0 0 25px #ff007a, inset 0 0 25px #ff007a88;
+  transform: scale(1.02);
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #ff99cc; /* color suave rosa */
+    opacity: 0.8;
+}
+
+/* Botón enviar dinámico */
+.btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 0.95rem;
+  background: linear-gradient(90deg, #ff005a, #ff66aa);
+  border: none;
+  border-radius: 35px;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 0 20px #ff66aa, 0 0 50px #ff66aa88;
+  align-self: center;
+  margin-top: 0.5rem;
+  transform-style: preserve-3d;
+}
+
+.btn:hover {
+  background: linear-gradient(90deg, #ff66aa, #ff005a);
+  transform: scale(1.15) rotateX(2deg) rotateY(2deg);
+  box-shadow: 0 0 45px #ff99bb, 0 0 90px #ff77aa;
+}
+
+/* Scrollbar personalizada */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-track {
+  background: #100017;
+}
+body::-webkit-scrollbar-thumb {
+  background: #ff4d81;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #ff4d81aa;
+}
+/* Scrollbar personalizada para textarea */
+.contact-form textarea::-webkit-scrollbar {
+  width: 12px;  /* ancho del scroll */
+}
+
+.contact-form textarea::-webkit-scrollbar-track {
+  background: #100017;  /* fondo del track */
+  border-radius: 10px;
+}
+
+.contact-form textarea::-webkit-scrollbar-thumb {
+  background: #ff4d81;  /* color del thumb */
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #ff4d81aa;
+}
+
+/* Opcional: hover en el thumb para más efecto */
+.contact-form textarea::-webkit-scrollbar-thumb:hover {
+  background: #ff66aa;
+  box-shadow: inset 0 0 8px #ff66aaaa;
+}
+
+.mensaje-neon {
+  font-size: 1.2rem;
+  color: #ff007a;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+}

@@ -1,0 +1,437 @@
+/* Reset y tipografía base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f1f1f1;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar full width con efecto vidrio y neón */
+.navbar {
+  width: 100vw;
+  background: rgba(20, 20, 35, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #ff004d88, inset 0 0 40px #ff004daa;
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff1a4d;
+  text-shadow:
+    0 0 10px #ff1a4d,
+    0 0 20px #ff1a4daa;
+  user-select: none;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-center {
+  gap: 3rem;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar-left {
+  min-width: 150px;
+  justify-content: flex-start;
+}
+
+.navbar-right {
+  min-width: 150px;
+  justify-content: flex-end;
+}
+
+.usuario {
+  color: #ff4d79;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #ff1a4d;
+}
+
+.navbar a {
+  color: #ff4d79;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  color: #fff;
+  transform: scale(1.2);
+  outline: none;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 4px;
+  background: #ff005a;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px #ff005a, 0 0 20px #ff005a;
+}
+
+.navbar a:hover::after,
+.navbar a:focus::after {
+  width: 100%;
+}
+
+/* Contenedor principal */
+.main-container {
+  flex-grow: 1;
+  width: 100vw;
+  padding: 3rem 4rem;
+  background:
+    radial-gradient(circle at center, #1c001c, #0d0010 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  box-shadow:
+    inset 0 0 150px 50px #ff004d88;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Título principal */
+h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  color: #ff007a;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+}
+p {
+  color: #ff007a;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+}
+label {
+  color: #ff007a;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+}
+
+@keyframes flickerNeon {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 12px #ff007a,
+      0 0 25px #ff007a99,
+      0 0 40px #ff007ab3;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.7;
+    text-shadow: none;
+  }
+}
+
+/* Lista de películas en grid */
+.funciones-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0;
+  list-style: none;
+  justify-items: center;
+}
+
+/* Cada tarjeta de película */
+.funciones-list li {
+  background: #3d003d;
+  border-radius: 20px;
+  padding: 1rem 1.5rem 2rem 1.5rem;
+  box-shadow: 5px 5px 15px #ff3366cc, -5px -5px 15px #660033cc, inset 0 0 10px #ff6699cc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  width: 250px;
+  user-select: none;
+}
+
+.funciones-list li:hover {
+  box-shadow: 8px 8px 30px #ff55aaee, -8px -8px 30px #bb2277ee, inset 0 0 25px #ff88bbcc;
+  transform: translateY(-6px) scale(1.05);
+  z-index: 3;
+}
+
+/* Imagen fija y centrada */
+.funciones-list li img {
+  width: 205px;
+  height: 290px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 0 20px #ff004d, 0 8px 25px #6f002dbb;
+  transition: transform 0.3s ease;
+}
+
+.funciones-list li img:hover {
+  transform: scale(1.1) rotate(1deg);
+  box-shadow: 0 0 40px #ff007a, 0 15px 50px #ff007aee;
+}
+
+/* Contenedor info centrado */
+.funcion-info {
+  margin-top: 1rem;
+  text-align: center;
+  color: #fce4f4;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* Título película */
+.funcion-info h3 {
+  color: #ff99bb;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  font-size: 1.1rem;
+  user-select: text;
+}
+
+/* Botón neon centrado */
+.btn {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.8rem;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #ff005a, #ff66aa);
+  border: none;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 900;
+  text-decoration: none;
+  text-align: center;
+  box-shadow:
+    0 0 25px #ff66aa,
+    0 0 60px #ff66aaaa;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.25s ease;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.btn:hover,
+.btn:focus {
+  background: linear-gradient(90deg, #ff66aa, #ff005a);
+  box-shadow:
+    0 0 45px #ff99bbcc,
+    0 0 85px #ff77aacc;
+  transform: scale(1.15);
+  outline: none;
+}
+
+.votar-btn {
+  margin-top: 4rem; /* espacio arriba del botón */
+  margin-bottom: 4rem; /* espacio abajo para que no quede pegado al final */
+  align-self: center; /* para centrarlo en el contenedor flex */
+  display: inline-block;
+  /* hereda estilos .btn ya definidos */
+}
+.votar2-btn {
+    display: block;          /* Hace que el botón ocupe toda la línea */
+    margin: 30px auto 60px;
+    margin-top: 4rem; /* espacio arriba del botón */
+    margin-bottom: 4rem;  /* 30px arriba, auto centrado horizontalmente, 60px abajo */
+}
+
+.votar2-btn:hover {
+    background-color: #ff77aa; /* Cambio de color al pasar el mouse */
+}
+.barra-votos {
+    background-color: #4b004b;
+    border-radius: 10px;
+    width: 100%;
+    height: 18px;
+    margin-top: 0.5rem;
+    box-shadow: inset 0 0 5px #ff66aa;
+}
+
+.barra-porcentaje {
+    background-color: #ff66aa;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+/* Fecha cierre estilo */
+.fecha-cierre {
+  color: #ff99bb;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: right;
+  width: 100%;
+  max-width: 1200px;
+  user-select: none;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+  text-align: center;
+}
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 1em 0;
+}
+.messages li {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+}
+.messages li.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+/* Texto cuando no hay películas */
+.no-funciones {
+  font-size: 1.6rem;
+  font-style: italic;
+  color: #cc6699cc;
+  margin-top: 5rem;
+  text-align: center;
+  user-select: none;
+  letter-spacing: 0.04em;
+}
+
+/* Scroll bar personalizada */
+.main-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.main-container::-webkit-scrollbar-track {
+  background: #100017;
+}
+
+.main-container::-webkit-scrollbar-thumb {
+  background: #ff4d81;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #ff4d81aa;
+}
+
+
+
+/* Animación flicker neon */
+@keyframes glowMove {
+  0% { transform: rotate(0deg) translateX(0); }
+  100% { transform: rotate(360deg) translateX(0); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .funciones-list {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.6rem;
+  }
+
+  .funciones-list li {
+    width: 140px;
+    padding: 1rem 1rem 1.8rem 1rem;
+  }
+
+  .funciones-list li img {
+    width: 120px;
+    height: 180px;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 1.5rem;
+  }
+
+  .funcion-info h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.6rem;
+  }
+
+  .funciones-list {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .funciones-list li {
+    width: 120px;
+    padding: 0.8rem 0.8rem 1.5rem 0.8rem;
+  }
+
+  .funciones-list li img {
+    width: 100%;
+    height: auto;
+    max-height: 160px;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.35rem 1.2rem;
+  }
+
+  .funcion-info h3 {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Funciones - {{ pelicula.titulo }}</title>
+    <link rel="stylesheet" href="{% static 'micine/funciones.css' %}"/>
+</head>
+<body class"funciones">
+    <nav class="navbar">
+    <div class="navbar-left">
+        <span class="usuario">👤 {{ user.username }}</span>
+    </div>
+
+    <div class="navbar-center">
+        <a href="{% url 'home' %}">Cartelera</a>
+        <a href="{% url 'snacks' %}">Snacks</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
+        <a href="{% url 'tickets_usuario' %}">Tickets</a>
+    </div>
+
+    <div class="navbar-right">
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+</nav>
+
+    <main class="main-container">
+        <h1>{{ pelicula.titulo }}</h1>
+        <div class="pelicula-info">
+            <img src="{{ pelicula.imagen.url }}" alt="Poster de {{ pelicula.titulo }}" style="max-width: 300px;">
+            <div class="info-text">
+                <p><strong>Sinopsis:</strong> {{ pelicula.sinopsis }}</p>
+                <p><strong>Duración:</strong> {{ pelicula.duracion }} minutos</p>
+                <p><strong>Clasificación:</strong> {{ pelicula.clasificacion }}</p>
+                 </div>
+        </div>
+
+        <h2>Funciones disponibles</h2>
+        {% if funciones %}
+            <ul class="funciones-list">
+                {% for funcion in funciones %}
+                    <li>
+                        Sala: {{ funcion.sala.nombre }} - Fecha: {{ funcion.fecha }} - Hora: {{ funcion.hora }}
+                        <a href="{% url 'asientos' funcion.id %}" class="btn">Ver asientos</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay funciones disponibles para esta película.</p>
+        {% endif %}
+    </main>
+    
+</body>
+</html>

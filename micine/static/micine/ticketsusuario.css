@@ -1,0 +1,330 @@
+/* Reset y tipografía base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f1f1f1;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar full width con efecto vidrio y neón */
+.navbar {
+  width: 100vw;
+  background: rgba(20, 20, 35, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #ff004d88, inset 0 0 40px #ff004daa;
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff1a4d;
+  text-shadow:
+    0 0 10px #ff1a4d,
+    0 0 20px #ff1a4daa;
+  user-select: none;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-center {
+  gap: 3rem;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar-left {
+  min-width: 150px;
+  justify-content: flex-start;
+}
+
+.navbar-right {
+  min-width: 150px;
+  justify-content: flex-end;
+}
+
+.usuario {
+  color: #ff4d79;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #ff1a4d;
+}
+
+.navbar a {
+  color: #ff4d79;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  color: #fff;
+  transform: scale(1.2);
+  outline: none;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 4px;
+  background: #ff005a;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px #ff005a, 0 0 20px #ff005a;
+}
+
+.navbar a:hover::after,
+.navbar a:focus::after {
+  width: 100%;
+}
+
+/* Contenedor principal */
+.main-container {
+  flex-grow: 1;
+  width: 100vw;
+  padding: 3rem 4rem;
+  background:
+    radial-gradient(circle at center, #1c001c, #0d0010 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  box-shadow:
+    inset 0 0 150px 50px #ff004d88;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Título principal sin línea abajo */
+h1 {
+  font-size: 4rem;
+  margin-bottom: 2.5rem;
+  color: #ff007a;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+}
+
+/* Animación flicker neon */
+@keyframes flickerNeon {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 12px #ff007a,
+      0 0 25px #ff007a99,
+      0 0 40px #ff007ab3;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.7;
+    text-shadow: none;
+  }
+}
+
+/* Lista de tickets en grid responsive */
+.tickets-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0;
+  list-style: none;
+  justify-items: center;
+}
+
+/* Cada tarjeta de ticket */
+.ticket-card {
+  position: relative;
+  background: linear-gradient(135deg, #3d003d, #660033);
+  border-radius: 30px;
+  padding: 2rem 3rem;
+  box-shadow:
+    5px 5px 15px #ff3366cc,
+    -5px -5px 15px #660033cc,
+    inset 0 0 15px #ff6699cc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fce4f4;
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: default;
+  user-select: none;
+  min-height: 130px;
+  border: 2px dashed #ff4d81;
+  overflow: visible;
+}
+
+/* Cortes semicirculares a los lados con ::before y ::after */
+.ticket-card::before,
+.ticket-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  background: #121012;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px #ff004d88;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+/* Corte izquierdo */
+.ticket-card::before {
+  left: -20px;
+  border: 2px dashed #ff4d81;
+  border-right: none;
+}
+
+/* Corte derecho */
+.ticket-card::after {
+  right: -20px;
+  border: 2px dashed #ff4d81;
+  border-left: none;
+}
+
+/* Hover efecto neón y elevación */
+.ticket-card:hover {
+  box-shadow:
+    8px 8px 30px #ff55aaee,
+    -8px -8px 30px #bb2277ee,
+    inset 0 0 30px #ff99bbcc;
+  transform: translateY(-8px) scale(1.07);
+  z-index: 20;
+}
+
+/* Mantengo el título dentro */
+.ticket-info h2 {
+  margin-bottom: 1.3rem;
+  color: #ff3380;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  font-size: 1.5rem;
+}
+
+/* Botón "Ver Ticket" */
+.ver-ticket-btn {
+  padding: 0.7rem 2.4rem;
+  background: linear-gradient(90deg, #ff005a, #ff66aa);
+  border: none;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.15rem;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 0 25px #ff66aa, 0 0 60px #ff66aaaa;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.25s ease;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  display: inline-block;
+  z-index: 5;
+  position: relative;
+}
+
+.ver-ticket-btn:hover,
+.ver-ticket-btn:focus {
+  background: linear-gradient(90deg, #ff66aa, #ff005a);
+  box-shadow: 0 0 45px #ff99bbcc, 0 0 85px #ff77aacc;
+  transform: scale(1.15);
+  outline: none;
+}
+
+/* Scroll bar personalizada para main container */
+.main-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.main-container::-webkit-scrollbar-track {
+  background: #100017;
+}
+
+.main-container::-webkit-scrollbar-thumb {
+  background: #ff4d81;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #ff4d81aa;
+}
+
+/* Responsive ajustes para mobile */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 2rem 2rem;
+  }
+  .tickets-list {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.3rem;
+    max-width: 95vw;
+  }
+  .ticket-card {
+    padding: 1.5rem 2rem;
+    font-size: 1.1rem;
+  }
+  .ticket-info h2 {
+    font-size: 1.3rem;
+  }
+  .ver-ticket-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.6rem;
+  }
+  .tickets-list {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+  .ticket-card {
+    font-size: 1rem;
+    padding: 1rem 1.2rem;
+  }
+  .ticket-info h2 {
+    font-size: 1.1rem;
+  }
+  .ver-ticket-btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 1.4rem;
+  }
+}

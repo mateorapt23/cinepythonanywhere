@@ -1,0 +1,409 @@
+/* Reset y tipografía base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f1f1f1;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar con efecto vidrio y neón */
+.navbar {
+  width: 100vw;
+  background: rgba(20, 20, 35, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #ff004d88, inset 0 0 40px #ff004daa;
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff1a4d;
+  text-shadow:
+    0 0 10px #ff1a4d,
+    0 0 20px #ff1a4daa;
+  user-select: none;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-center {
+  gap: 3rem;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar-left {
+  min-width: 150px;
+  justify-content: flex-start;
+}
+
+.navbar-right {
+  min-width: 150px;
+  justify-content: flex-end;
+}
+
+.usuario {
+  color: #ff4d79;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #ff1a4d;
+}
+
+.navbar a {
+  color: #ff4d79;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 4px;
+  background: #ff005a;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px #ff005a, 0 0 20px #ff005a;
+}
+
+.navbar a:hover::after,
+.navbar a:focus::after {
+  width: 100%;
+}
+
+/* Contenedor principal */
+.main-container {
+  flex-grow: 1;
+  width: 100vw;
+  padding: 3rem 4rem;
+  background: radial-gradient(circle at center, #1c001c, #0d0010 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  box-shadow: inset 0 0 150px 50px #ff004d88;
+  overflow-y: auto;
+}
+
+/* Scroll bar personalizada */
+.main-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.main-container::-webkit-scrollbar-track {
+  background: #100017;
+}
+
+.main-container::-webkit-scrollbar-thumb {
+  background: #ff4d81;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #ff4d81aa;
+}
+
+
+
+/* Título principal */
+h1 {
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+  color: #ff007a;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+}
+
+/* Contenedor de fecha global */
+.fecha-container {
+    width: 100%;
+    max-width: 1200px;  /* opcional, para no extenderlo demasiado */
+    display: flex;
+    justify-content: flex-end; /* alinea todo a la derecha */
+    align-items: center;       /* centra verticalmente label y calendario */
+    gap: 0.5rem;               /* espacio entre label y input */
+    margin-bottom: 4rem;
+}
+
+.fecha-container label {
+    font-weight: 700;
+    color: #ff99bb;
+    text-shadow: 0 0 12px #ff007a, 0 0 25px #ff007a99, 0 0 40px #ff007ab3;
+    user-select: none;
+    animation: flickerNeon 3s infinite alternate;
+}
+
+#fecha-compra {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 0, 90, 0.2);
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff66aa;
+    transition: all 0.3s ease;
+}
+
+#fecha-compra:hover {
+    background: rgba(255, 0, 90, 0.4);
+    box-shadow: 0 0 20px #ff77bb;
+}
+
+/* Grid de snacks */
+.snacks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  justify-items: center;
+}
+
+/* Tarjeta de snack */
+.snack-card {
+  background: #3d003d;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 5px 5px 15px #ff3366cc, -5px -5px 15px #660033cc, inset 0 0 10px #ff6699cc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 220px;
+}
+
+.snack-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 8px 8px 30px #ff55aaee, -8px -8px 30px #bb2277ee, inset 0 0 25px #ff88bbcc;
+}
+
+.snack-card img,
+.snack-card div[style*="Sin imagen"] {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 15px #ff66aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snack-card h3 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #ff99bb;
+  text-align: center;
+  margin-bottom: 1.8rem; /* antes 0.3rem, más separación con descripción */
+  text-shadow:
+    0 0 5px #6c414f,
+    0 0 10px #ff99bb,
+    0 0 20px #ff66aa,
+    0 0 40px #ff66aa;
+
+}
+
+.snack-card p {
+  font-size: 0.95rem;
+  color: #ff66aa;
+  text-align: center;
+  margin-bottom: 1.2rem; /* antes 0.5rem, separación un poco mayor */
+  font-weight: 700;
+  color: #ff99bb;
+  text-shadow: 0 0 12px #ff007a, 0 0 25px #ff007a99, 0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+}
+
+.snack-card p:last-of-type {
+    margin-top: 1.2rem; /* espacio entre descripción y precio */
+    margin-bottom: 0.5rem; /* opcional: espacio debajo del precio */
+    color: #ffffff;
+}
+/* Botón comprar */
+.comprar-btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #ff005a, #ff66aa);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.comprar-btn:hover {
+  background: linear-gradient(90deg, #ff66aa, #ff005a);
+  box-shadow: 0 0 25px #ff77bb, 0 0 50px #ff55aa;
+  transform: scale(1.1);
+}
+
+.flatpickr-calendar {
+    background-color: #2a002a !important; /* fondo oscuro */
+    color: #ff66aa !important; /* texto de días */
+    border: 2px solid #ff1a4d !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 20px #ff66aa, 0 0 50px #ff1a4d inset;
+}
+
+.flatpickr-day {
+    background: #3d003d;
+    color: #ff99bb;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.flatpickr-day:hover {
+    background: #ff66aa !important;
+    color: #1c001c !important;
+    box-shadow: 0 0 10px #ff66aa, 0 0 20px #ff1a4d;
+    transform: scale(1.1);
+}
+
+.flatpickr-day.today {
+    background: #ff4d81 !important;
+    color: #1c001c !important;
+    font-weight: bold;
+
+}
+.flatpickr-day.nextMonthDay,
+.flatpickr-day.prevMonthDay {
+    color: #888888 !important;
+}
+
+.flatpickr-day.flatpickr-disabled {
+    color: #555555 !important;        /* color gris apagado */
+    background: #1c001c !important;   /* fondo oscuro opcional */
+    cursor: not-allowed;               /* cursor de prohibido */
+    opacity: 0.5;                      /* más transparencia */
+}
+
+.flatpickr-day.selected {
+    background: #ff1a4d !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px #ff1a4d, 0 0 30px #ff66aa inset;
+}
+
+.flatpickr-months {
+    background: transparent !important;
+}
+
+.flatpickr-current-month {
+    color: #ff66aa !important;
+    font-weight: bold;
+}
+.flatpickr-monthDropdown-months {
+    background-color: #2a002a !important;  /* fondo oscuro */
+}
+
+/* Color de las letras de los meses dentro del dropdown */
+.flatpickr-monthDropdown-months .flatpickr-month {
+    color: #ff66aa !important;  /* letras neón */
+    font-weight: bold;
+}
+
+/* Hover sobre cada mes */
+.flatpickr-monthDropdown-months .flatpickr-month:hover {
+    background-color: #ff1a4d !important;
+    color: #ffffff !important;
+}
+
+
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    color: #ff66aa !important;
+}
+
+.flatpickr-weekday {
+    color: #ff99bb !important;
+    font-weight: bold;
+}
+
+.flatpickr-input {
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px;
+    border: 2px solid #ff66aa;
+    background-color: #3d003d;
+    color: #ff99bb;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    text-shadow: 0 0 5px #ff66aa;
+}
+
+.flatpickr-input:focus {
+    outline: none;
+    box-shadow: 0 0 15px #ff66aa, 0 0 25px #ff1a4d;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .snacks-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .snack-card img,
+  .snack-card div[style*="Sin imagen"] {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .snacks-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .snack-card img,
+  .snack-card div[style*="Sin imagen"] {
+    width: 120px;
+    height: 120px;
+  }
+
+  #fecha-compra {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+

@@ -1,0 +1,538 @@
+/* Reset y tipografía base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f1f1f1;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar full width con efecto vidrio y neón */
+.navbar {
+  width: 100vw;
+  background: rgba(20, 20, 35, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #ff004d88, inset 0 0 40px #ff004daa;
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff1a4d;
+  text-shadow:
+    0 0 10px #ff1a4d,
+    0 0 20px #ff1a4daa;
+  user-select: none;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-center {
+  gap: 3rem;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar-left {
+  min-width: 150px;
+  justify-content: flex-start;
+}
+
+.navbar-right {
+  min-width: 150px;
+  justify-content: flex-end;
+}
+
+.usuario {
+  color: #ff4d79;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #ff1a4d;
+}
+
+.navbar a {
+  color: #ff4d79;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  color: #fff;
+  transform: scale(1.2);
+  outline: none;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 4px;
+  background: #ff005a;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px #ff005a, 0 0 20px #ff005a;
+}
+
+.navbar a:hover::after,
+.navbar a:focus::after {
+  width: 100%;
+}
+
+/* Contenedor principal full width y height, con padding */
+.main-container {
+  flex-grow: 1;
+  width: 100vw;
+  padding: 3rem 6rem;
+  background:
+    radial-gradient(circle at center, #1c001c, #0d0010 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* descontando navbar */
+  box-shadow:
+    inset 0 0 150px 50px #ff004d88;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Título principal con neón y sombra */
+h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  color: #ff007a;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px #ff007a,
+    0 0 25px #ff007a99,
+    0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+}
+
+/* Efecto flicker neon */
+@keyframes flickerNeon {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 12px #ff007a,
+      0 0 25px #ff007a99,
+      0 0 40px #ff007ab3;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.7;
+    text-shadow: none;
+  }
+}
+
+/* Info película: imagen grande a la izquierda, texto a la derecha */
+.pelicula-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.pelicula-info img {
+    flex-shrink: 0;
+}
+
+
+.pelicula-info img:hover {
+  transform: scale(1.12) rotate(2deg);
+  box-shadow:
+    0 0 55px #ff007a,
+    0 15px 60px #ff007aee;
+}
+
+.info-text {
+    flex: 1;
+    min-width: 250px;
+    white-space: normal;
+    overflow: visible;
+    word-break: break-word;
+}
+.info-text p {
+  margin: 0;
+  padding: 0.4rem 0;
+  flex-basis: 0;   /* Base para que funcione flex-grow */
+  flex-grow: 1;    /* Todos crecen igual, ocupando el espacio */
+  overflow: hidden;
+}
+
+.info-text p strong {
+  color: #ff3380;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+}
+
+.info-text .sinopsis {
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #f5b1d9cc;
+  line-height: 1.8;
+  text-align: justify;
+  flex-grow: 2; /* Ocupa doble espacio que los demás */
+}
+
+/* Contenedor funciones */
+h2 {
+  font-size: 3.5rem;
+  margin: 3rem 0 2rem 0;
+  color: #ff3366;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-shadow:
+    0 0 15px #ff3366cc,
+    0 0 25px #ff3366bb;
+  user-select: none;
+}
+
+/* Lista funciones: grid con 4 columnas, ajustable */
+.funciones-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.8rem;
+  width: 100%;
+  max-width: 1400px;
+  list-style: none;
+  padding: 0;
+}
+
+/* Cada tarjeta de funcion */
+.funciones-list li {
+  background: #3d003d;
+  border-radius: 24px;
+  padding: 2rem 2.5rem;
+  box-shadow:
+    8px 8px 22px #ff3366cc,
+    -8px -8px 22px #660033cc,
+    inset 0 0 15px #ff6699cc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.funciones-list li:hover {
+  box-shadow:
+    10px 10px 35px #ff55aaee,
+    -10px -10px 35px #bb2277ee,
+    inset 0 0 30px #ff88bbcc;
+  transform: translateY(-12px) scale(1.05);
+  z-index: 3;
+}
+
+/* Animación glow */
+.funciones-list li::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(45deg, transparent, #ff3366dd, transparent);
+  animation: glowMove 3.5s linear infinite;
+  filter: blur(22px);
+  opacity: 0.7;
+  z-index: 0;
+  border-radius: 24px;
+}
+
+/* Info dentro de la tarjeta */
+.funcion-info {
+  position: relative;
+  z-index: 1;
+  color: #fce4f4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.funcion-info p strong {
+  color: #ff99bb;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+/* Botón comprar estilo neon */
+.btn {
+  margin-top: 1.8rem;
+  align-self: center;
+  padding: 0.7rem 2.4rem;
+  background: linear-gradient(90deg, #ff005a, #ff66aa);
+  border: none;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-decoration: none;
+  text-align: center;
+  box-shadow:
+    0 0 25px #ff66aa,
+    0 0 60px #ff66aaaa;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.25s ease;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 10;
+
+}
+
+.btn:hover,
+.btn:focus {
+  background: linear-gradient(90deg, #ff66aa, #ff005a);
+  box-shadow:
+    0 0 45px #ff99bbcc,
+    0 0 85px #ff77aacc;
+  transform: scale(1.15);
+  outline: none;
+}
+
+/* Texto cuando no hay funciones */
+.no-funciones {
+  font-size: 1.6rem;
+  font-style: italic;
+  color: #cc6699cc;
+  margin-top: 5rem;
+  text-align: center;
+  user-select: none;
+  letter-spacing: 0.04em;
+}
+
+/* Scroll bar personalizada para la lista funciones y main */
+.main-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.main-container::-webkit-scrollbar-track {
+  background: #100017;
+}
+
+.main-container::-webkit-scrollbar-thumb {
+  background: #ff4d81;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #ff4d81aa;
+}
+
+/* Animación glow rotativa */
+@keyframes glowMove {
+  0% { transform: rotate(0deg) translateX(0); }
+  100% { transform: rotate(360deg) translateX(0); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pelicula-info {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    max-width: 700px;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .pelicula-info img {
+    width: 300px;
+    height: 450px;
+  }
+
+  .info-text {
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .pelicula-info img {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+  }
+}
+/* 🎬 AJUSTES PRINCIPALES MEJORADOS */
+
+.pelicula-info {
+  display: flex;
+  gap: 2.5rem;
+  background: #2a002a;
+  border-radius: 30px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 0 30px #ff007a, inset 0 0 60px #8b0047aa;
+  user-select: none;
+  align-items: flex-start;
+}
+
+.pelicula-info img {
+  width: 280px;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 25px #ff004d, 0 10px 30px #6f002dbb;
+  transition: transform 0.3s ease;
+}
+
+.pelicula-info img:hover {
+  transform: scale(1.08) rotate(1deg);
+  box-shadow: 0 0 40px #ff007a, 0 15px 50px #ff007aee;
+}
+
+.info-text {
+  color: #f1c1e3;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 100%;
+  flex: 1;
+}
+
+.info-text p strong {
+  color: #ff3380;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.info-text .sinopsis {
+  margin-top: 1rem;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #f5b1d9cc;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* 🎟️ FUNCIONES MÁS COMPACTAS Y UNIDAS */
+
+.funciones-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0;
+}
+
+.funciones-list li {
+  background: #3d003d;
+  border-radius: 20px;
+  padding: 1.8rem 2rem;
+  box-shadow: 5px 5px 15px #ff3366cc, -5px -5px 15px #660033cc, inset 0 0 10px #ff6699cc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.funciones-list li:hover {
+  box-shadow: 8px 8px 30px #ff55aaee, -8px -8px 30px #bb2277ee, inset 0 0 25px #ff88bbcc;
+  transform: translateY(-8px) scale(1.03);
+}
+
+.funcion-info {
+  position: relative;
+  z-index: 1;
+  color: #fce4f4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.btn {
+  margin-top: 1.5rem;
+  padding: 0.6rem 2rem;
+  font-size: 1.05rem;
+  z-index: 10;
+}
+
+/* 📱 RESPONSIVE AJUSTADO */
+
+@media (max-width: 1024px) {
+  .pelicula-info {
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .pelicula-info img {
+    width: 240px;
+    height: auto;
+  }
+
+  .info-text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .pelicula-info img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 0.5rem 1.3rem;
+  }
+
+  .funcion-info {
+    font-size: 1rem;
+  }
+}
