@@ -1,1 +1,1 @@
-web: gunicorn simulacioncine.wsgi
+web: gunicorn miproyecto.wsgi
