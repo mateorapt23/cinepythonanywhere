@@ -8,7 +8,7 @@ class Pelicula(models.Model):
     clasificacion = models.CharField(max_length=10)
     imagen = models.ImageField(upload_to='peliculas/', blank=True, null=True)
     habilitada_votacion = models.BooleanField(default=False)
-    _porcentaje_votos = 0  # atributo privado para uso interno (no DB)
+    _porcentaje_votos = 0  # atributo privado para uso interno 
 
     def __str__(self):
         return self.titulo
@@ -48,7 +48,7 @@ class Asiento(models.Model):
     funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE)
     fila = models.IntegerField()
     columna = models.IntegerField()
-    estado = models.CharField(max_length=10, default='vendido')  # ya no usamos 'disponible'
+    estado = models.CharField(max_length=10, default='vendido') 
 
     def __str__(self):
         return f"F{self.fila}-C{self.columna} ({self.estado})"

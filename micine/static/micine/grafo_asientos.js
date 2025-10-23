@@ -1,9 +1,9 @@
-// static/micine/grafo_asientos.js
+
 document.addEventListener("DOMContentLoaded", () => {
   const data = window.asientosData;
   if (!data) return;
 
-  // --- Grafo grande (asientos estáticos, sin interacción) ---
+  // Grafo grande (asientos estáticos) 
   const containerGrande = document.getElementById('grafo-container');
   containerGrande.innerHTML = '';
 
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   containerGrande.appendChild(svgGrande);
 
-  // --- Grafo pequeño (subgrafo usuario + vecinos) con D3 y simulación ---
+  //  Grafo pequeño (subgrafo usuario + vecinos) con D3
 
   // Función para obtener vecinos de un nodo
   function obtenerVecinos(nodoId, edges) {
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Transformar aristas para D3: source/target en vez de from/to
+  // Transformar aristas para D3
   const aristasSubgrafoD3 = aristasSubgrafo.map(edge => ({
     source: edge.from,
     target: edge.to
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   containerPequeno.innerHTML = '';
 
-  // Crear contenedor para texto info (si no existe)
+  // Crear contenedor para texto info 
   let infoContainer = document.getElementById('grafo-info');
   if (!infoContainer) {
     infoContainer = document.createElement('div');
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     infoContainer.style.maxWidth = '400px';
     infoContainer.style.fontFamily = 'Arial, sans-serif';
     infoContainer.style.fontSize = '14px';
-    // Para que quede a la derecha, uso flexbox (puedes ajustar el CSS)
+    // Queda a la derecha
     const wrapper = document.createElement('div');
     wrapper.style.display = 'flex';
     wrapper.style.gap = '1rem';
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // --- FUNCIONES para análisis de grafo ---
+  // Funciones para análisis de grafo
 
   // Verifica si el grafo es conexo (BFS)
   function esConexo(nodos, aristas) {
@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return { aislados, colgantes, otros };
   }
 
-  // Análisis Euleriano (simplificado)
+  // Análisis Euleriano 
   function tipoEuleriano(nodos, aristas) {
     if (!esConexo(nodos, aristas)) return 'No conexo';
     const grados = new Map();
@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else return 'No Euleriano';
   }
 
-  // Para Hamiltoniano solo dejamos "Pendiente" (no hacemos cálculo)
+  // Para Hamiltoniano "pendiente" por que es NP-Completo
   const tipoHamiltoniano = 'Pendiente';
 
   // Calculamos propiedades
@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mostrar texto
   infoContainer.innerHTML = texto;
 
-  // --- FIN análisis texto ---
+  // final
 
   const simulation = d3.forceSimulation(nodesArray)
     .force("link", d3.forceLink(aristasSubgrafoD3).id(d => d.id).distance(50).strength(1))

@@ -4,11 +4,53 @@ body.auth-body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url("https://okdiario.com/img/2022/03/31/filmin-esta-lleno-de-obras-maestras-del-cine.jpg");
+  background-image: url("/static/micine/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #f1f1f1;
+}
+
+.moving-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;      /* ancho de las dos imágenes */
+  height: 100vh;
+  display: flex;
+  z-index: -1;
+  animation: slide 60s linear infinite;
+}
+
+.bg-part {
+  width: 50%;       /* cada mitad ocupa la pantalla */
+  height: 100%;
+  background-image: url("/static/micine/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); } /* mueve la primera mitad fuera de pantalla */
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); } /* mueve la mitad de su ancho */
+}
+
+/* Chrome, Safari, Edge */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #1f1a3b inset; /* mantiene tu color de fondo */
+  -webkit-text-fill-color: #fff;                   /* color del texto */
+  transition: background-color 5000s ease-in-out;  /* evita parpadeo */
+}
+
+/* Firefox */
+input:-moz-autofill {
+  box-shadow: 0 0 0px 1000px #1f1a3b inset;
+  -moz-text-fill-color: #fff;
 }
 
 /* Contenedor centrado del login y registro */
@@ -144,4 +186,17 @@ form input:focus {
   height: 1px;
   background: #555;
   margin: 0 1rem;
+}
+
+/* Scrollbar personalizada */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-track {
+  background: #100017;
+}
+body::-webkit-scrollbar-thumb {
+  background: #ff4d81;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #ff4d81aa;
 }

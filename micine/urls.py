@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.login_view, name='login'),  # raíz va a registro
+    path('', views.login_view, name='login'),  
     path('registro/', views.registro, name='registro'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
@@ -18,5 +18,5 @@ urlpatterns = [
     path('funciones/<int:pelicula_id>/', views.funciones_por_pelicula, name='funciones_por_pelicula'),
     path('funcion/<int:funcion_id>/asientos/', views.asientos, name='asientos'),
     path('comprar_asientos/<int:funcion_id>/', views.comprar_asientos, name='comprar_asientos'),
-    path('home/', views.home, name='home'),  # cartelera queda en /home/
+    path('home/', views.home, name='home'),  
 ]

@@ -1,29 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout, authenticate
-from .models import Pelicula, Funcion, Asiento, Snack, VotoPelicula, SnacksCompra
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from datetime import datetime, time
-from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError
-from .models import Compra
-import string
-import random
 from django.contrib import messages
-import json
-import math
-from collections import deque
-import networkx as nx
-import matplotlib.pyplot as plt
-import base64
-from datetime import date
-from io import BytesIO
-from django.utils import timezone
 from django.db.models import Prefetch
+from django.utils import timezone
+import json, string, random
+from collections import deque
+from datetime import date
+from .models import (
+    Pelicula, Funcion, Asiento, Snack, VotoPelicula, 
+    SnacksCompra, Compra
+)
 
-
-VOTACION_CIERRE = timezone.datetime(2025, 12, 31, 23, 59, 59)
+VOTACION_CIERRE = timezone.datetime(2025, 8, 25, 23, 59, 59)
 
 def registro(request):
     if request.method == 'POST':
@@ -59,7 +51,7 @@ def snacks(request):
     snacks = Snack.objects.all()
     return render(request, "micine/snacks.html", {
         "snacks": snacks,
-        "today": date.today()  # para usar en el input de fecha
+        "today": date.today()  
     })
 
 @csrf_exempt
@@ -71,7 +63,6 @@ def comprar_snack(request):
         cantidad = int(data.get("cantidad", 1))
         fecha_compra = data.get("fecha_compra")
 
-        # Convertir fecha_compra a objeto date
         fecha_obj = date.fromisoformat(fecha_compra)
 
         # Validar que la fecha no sea pasada
@@ -121,14 +112,17 @@ def votacionpeliculas(request):
         pelicula_id = request.POST.get('pelicula_id')
         if pelicula_id:
            pelicula = get_object_or_404(Pelicula, id=pelicula_id)
-           voto_obj, created = VotoPelicula.objects.get_or_create(usuario=request.user)
-           voto_obj.pelicula = pelicula
-           voto_obj.save()
+           try:
+               voto_obj = VotoPelicula.objects.get(usuario=request.user)
+               voto_obj.pelicula = pelicula
+               voto_obj.save()
+           except VotoPelicula.DoesNotExist:
+               VotoPelicula.objects.create(usuario=request.user, pelicula=pelicula)
+
            return redirect('votacionpeliculas')
         else:
-           messages.error(request, "Por favor selecciona una película para votar antes de enviar.")
-        # No redirect aquí, simplemente renderizar para mostrar el mensaje
-        # No redirect aquí, solo render para que se muestre el mensaje
+            messages.error(request, "Por favor selecciona una película para votar antes de enviar.")
+   
 
     return render(request, 'micine/votacionpeliculas.html', {
         'peliculas': peliculas,
@@ -175,7 +169,7 @@ def funciones_por_pelicula(request, pelicula_id):
 def asientos(request, funcion_id):
     funcion = get_object_or_404(Funcion, id=funcion_id)
 
-    # Si la función aún no tiene lado asignado, lo definimos y guardamos
+    # Si la función aún no tiene lado asignado, se define y guarda
     if not funcion.puerta_lado:
         funcion.puerta_lado = random.choice(["izquierda", "derecha"])
         funcion.save()
@@ -271,14 +265,14 @@ def grafo_asientos(request, ticket_id):
     # Asientos vendidos en esta función
     asientos_vendidos = set(Asiento.objects.filter(funcion=funcion).values_list('fila', 'columna'))
 
-    # Construimos nodos y aristas del grafo (grid adjacency)
+    # Construimos nodos y aristas del grafo
     nodes = []
     edges = []
     for r in range(1, filas + 1):
         letra = chr(64 + r)  # 1 -> A
         for c in range(1, columnas + 1):
-            node_id = f"{r}-{c}"                  # id interno (num-num)
-            label = f"{letra}-{c}"                # etiqueta visible (A-1)
+            node_id = f"{r}-{c}"                 
+            label = f"{letra}-{c}"                
             sold = (r, c) in asientos_vendidos
             nodes.append({
                 "id": node_id,
@@ -287,14 +281,14 @@ def grafo_asientos(request, ticket_id):
                 "columna": c,
                 "vendido": sold
             })
-            # arista a la derecha (si existe)
+            # arista a la derecha 
             if c < columnas:
                 edges.append({"from": node_id, "to": f"{r}-{c+1}"})
-            # arista abajo (si existe)
+            # arista abajo
             if r < filas:
                 edges.append({"from": node_id, "to": f"{r+1}-{c}"})
 
-    # Asientos comprados en este ticket (ids num-num)
+    # Asientos comprados en este ticket 
     user_seats = [f"{a.fila}-{a.columna}" for a in compra.asientos.all()]
 
     payload = {
@@ -343,7 +337,7 @@ def grafo_rutas(request, ticket_id):
                 "columna": c,
                 "vendido": sold
             })
-            # aristas (adyacencia grid)
+            # aristas 
             if c < columnas:
                 edges.append({"from": node_id, "to": f"{r}-{c+1}"})
             if r < filas:
@@ -353,14 +347,13 @@ def grafo_rutas(request, ticket_id):
 
     # ------------------------
     # Camino corto a la puerta (grafo reducido 1)
-    # Aquí simplificamos: asumamos que camino_corto es el camino directo en línea recta (ficticio).
-    # En la práctica usarías un algoritmo (Dijkstra, BFS) con pesos para obtener ruta real.
+    
     if funcion.puerta_lado == 'izquierda':
         puerta_id = "1-1"
     else:
         puerta_id = f"1-{columnas}"
 
-# Construir adjacency para BFS
+# Construir adyacencia para BFS
     adjacency = {}
     for r in range(1, filas + 1):
         for c in range(1, columnas + 1):
@@ -432,9 +425,8 @@ def grafo_rutas(request, ticket_id):
        "edges": camino_edges
     }
 
-    # ------------------------
     # Distancia pantalla - asientos (grafo reducido 2)
-    # Nodos: pantalla + asientos comprados
+
     pantalla_id = "pantalla"
     pantalla_nodo = {"id": pantalla_id, "label": "Pantalla", "color": "#3498db"}
 
@@ -445,9 +437,9 @@ def grafo_rutas(request, ticket_id):
         nodo = next((n for n in nodes if n["id"] == seat_id), None)
         if nodo:
             distancia_nodes.append(nodo)
-            # Calcular distancia ficticia en metros: distancia Euclidiana en grid * 0.8 m por asiento aprox
+            # Calcular distancia ficticia en metros
             fila_p = filas // 10  # aprox la fila donde esta la pantalla (arriba)
-            # En realidad pantalla esta arriba, fila=0
+            # Pantalla arriba: fila=0
             fila_p = 0
             nodo_fila = nodo['fila']
             nodo_col = nodo['columna']
@@ -464,9 +456,8 @@ def grafo_rutas(request, ticket_id):
         "edges": distancia_edges
     }
 
-    # ------------------------
     # Ruta del usuario (grafo dirigido 3)
-    # Nodos: Entrada, Snacks, Sala, Asientos comprados
+
     ruta_nodes = [
         {"id": "entrada", "label": "Entrada", "color": "#e67e22"},
         {"id": "snacks", "label": "Snacks Bar", "color": "#e74c3c"},
@@ -481,11 +472,10 @@ def grafo_rutas(request, ticket_id):
         {"source": "snacks", "target": "sala"},
         {"source": "sala", "target": user_seats[0] if user_seats else None},
     ]
-    # Añadir enlaces entre asientos (en orden)
+    # Añadir enlaces entre asientos
     for i in range(len(user_seats) - 1):
         ruta_edges.append({"source": user_seats[i], "target": user_seats[i+1]})
 
-    # Limpiar None targets
     ruta_edges = [e for e in ruta_edges if e["target"] is not None]
 
     ruta_usuario = {

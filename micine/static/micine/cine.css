@@ -239,11 +239,12 @@ label {
 
 /* Título película */
 .funcion-info h3 {
-  color: #ff99bb;
-  font-weight: 900;
-  letter-spacing: 0.03em;
-  font-size: 1.1rem;
-  user-select: text;
+    color: #ff99bb;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    font-size: 1.1rem;
+    user-select: text;
+    min-height: 3em; /* Ajusta según la altura que necesites */
 }
 
 /* Botón neon centrado */

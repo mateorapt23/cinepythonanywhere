@@ -1,11 +1,10 @@
-// static/micine/grafo_rutas.js
 document.addEventListener("DOMContentLoaded", () => {
   const data = window.rutasData;
   if (!data) return;
 
   const SVG_NS = "http://www.w3.org/2000/svg";
 
-  // --- Grafo grande (asientos + pantalla + puerta) ---
+  // Grafo grande (asientos + pantalla + puerta) 
   const containerGrande = document.getElementById('grafo-container');
   containerGrande.innerHTML = '';
 
@@ -87,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Dibujar pantalla arriba (centrada)
+  // Dibujar pantalla arriba 
   const pantallaX = widthGrande / 2;
   const pantallaY = vPadding / 2;
 
@@ -135,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   containerGrande.appendChild(svgGrande);
 
-  // --- Función común para grafo reducido con D3 (zoom+drag) ---
+  // Función común para grafo reducido con D3 
   function crearGrafoReducido(containerId, nodes, links, isDirected = false, linkLabels = null) {
     const width = 300;
     const height = 250;
@@ -270,8 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --- Datos para grafo 1: camino corto a puerta ---
-  // Aquí asumimos que data.camino_corto es una lista de nodos y edges que forman ese camino
+  // Datos para grafo 1: camino corto a puerta 
   if (data.camino_corto) {
     crearGrafoReducido(
       'grafo-camino-corto',
@@ -281,8 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // --- Datos para grafo 2: distancia pantalla - asientos ---
-  // data.distancia_pantalla: { nodes: [], edges: [] }, edges con propiedad 'distance' para mostrar
+  // Datos para grafo 2: distancia pantalla - asientos
   if (data.distancia_pantalla) {
     crearGrafoReducido(
       'grafo-pantalla-distancia',
@@ -293,8 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // --- Datos para grafo 3: ruta del usuario ---
-  // Grafo dirigido con nodes y edges
+  // Datos para grafo 3: ruta del usuario
   if (data.ruta_usuario) {
     crearGrafoReducido(
       'grafo-ruta-usuario',
