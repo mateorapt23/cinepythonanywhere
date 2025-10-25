@@ -273,3 +273,79 @@ body::-webkit-scrollbar-thumb {
   user-select: none;
   animation: flickerNeon 3s infinite alternate;
 }
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9998;
+  backdrop-filter: blur(5px);
+}
+
+/* Caja de mensaje centrada */
+#thankYouBox {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(20, 20, 35, 0.95);
+  padding: 2.5rem 3rem;
+  border-radius: 20px;
+  box-shadow: 0 0 40px #ff007a, 0 0 80px #ff007a88, inset 0 0 30px #ff004d55;
+  z-index: 9999;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Animación de entrada */
+@keyframes popIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Botón cerrar (X) */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #ff007a;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  text-shadow: 0 0 10px #ff007a;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: #fff;
+  transform: scale(1.3) rotate(90deg);
+  text-shadow: 0 0 20px #ff007a, 0 0 40px #ff007a;
+}
+
+/* Mensaje con efecto neón (ya lo tienes pero lo dejo por si acaso) */
+.mensaje-neon {
+  font-size: 1.3rem;
+  color: #ff007a;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px #ff007a, 0 0 25px #ff007a99, 0 0 40px #ff007ab3;
+  user-select: none;
+  animation: flickerNeon 3s infinite alternate;
+  line-height: 1.6;
+}
