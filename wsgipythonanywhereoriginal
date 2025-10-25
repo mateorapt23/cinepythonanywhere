@@ -2,9 +2,9 @@ import os
 import sys
 
 # Ruta a tu proyecto
-path = '/home/mateorapt23/cinepythonanywhere'
-if path not in sys.path:
-    sys.path.append(path)
+project_home = '/home/mateorapt23/cinepythonanywhere'
+if project_home not in sys.path:
+    sys.path.insert(0, project_home)
 
 # Configurar Django settings
 os.environ['DJANGO_SETTINGS_MODULE'] = 'miproyecto.settings'
