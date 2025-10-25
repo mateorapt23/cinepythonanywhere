@@ -1,0 +1,14 @@
+import os
+import sys
+
+# Ruta a tu proyecto
+path = '/home/mateorapt23/cinepythonanywhere'
+if path not in sys.path:
+    sys.path.append(path)
+
+# Configurar Django settings
+os.environ['DJANGO_SETTINGS_MODULE'] = 'miproyecto.settings'
+
+# Cargar la aplicación Django
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
